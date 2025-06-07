@@ -10,21 +10,26 @@ menu = {
     "Tortilla Salad": 8.00
 }
 
+total = 0  # global variable
+
 def main():
+    print("📋 Menu:")
+    for item in menu:
+        print(f"{item}: ${menu[item]:.2f}")  # fixed f-string for clean display
 
     while True:
         try:
-            items = input("Items: ").title()
+            items = input("Item: ").title()
             result = bill(items)
-            
+            if result:
+                print(result)
         except EOFError:
-            print(result)
+            print("\nOrder complete.")
             break
 
-
 def bill(items):
-    total = 0
+    global total
     if items in menu:
         total += menu[items]
-        return f"Total: {total: .2f}"
-main()
+        return f"Total: ${total:.2f}"
+
